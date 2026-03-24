@@ -93,154 +93,114 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 })();
 
 // ============================================================
-//  3. スクロールアニメーション
+//  3. スクロールアニメーション（IntersectionObserver版）
 // ============================================================
 (function initScrollAnimations() {
 
-  // --- js-fade: 下からフェードイン ---
-  qsa('.js-fade').forEach(el => {
-    // ページロード時に既に表示されているものはスキップ
-    gsap.fromTo(el,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        }
-      }
-    );
-  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
 
-  // --- js-fade-line: セクションラベル (左からスライド) ---
-  qsa('.js-fade-line').forEach(el => {
-    gsap.fromTo(el,
-      { opacity: 0, x: -30 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        }
+      if (el.classList.contains('js-fade')) {
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }
+        );
       }
-    );
-  });
+      else if (el.classList.contains('js-fade-line')) {
+        gsap.fromTo(el,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 1, ease: 'power3.out' }
+        );
+      }
+      else if (el.classList.contains('js-clip')) {
+        gsap.fromTo(el,
+          { clipPath: 'inset(100% 0 0 0)' },
+          { clipPath: 'inset(0% 0 0 0)', duration: 1.4, ease: 'power4.inOut' }
+        );
+      }
 
-  // --- js-clip: クリップパス（下から開く）---
-  qsa('.js-clip').forEach(el => {
-    gsap.fromTo(el,
-      { clipPath: 'inset(100% 0 0 0)' },
-      {
-        clipPath: 'inset(0% 0 0 0)',
-        duration: 1.4,
-        ease: 'power4.inOut',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        }
-      }
-    );
-  });
+      observer.unobserve(el); // 一度発火したら解除
+    });
+  }, { threshold: 0.15 });
 
-  // --- ワークカード: スタガーで出現 ---
-  const workGrids = qsa('.works__grid, .writing-grid');
-  workGrids.forEach(grid => {
-    const cards = qsa('.work-card, .writing-item', grid);
-    gsap.fromTo(cards,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: grid,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        }
-      }
-    );
-  });
+  // js-fade / js-fade-line / js-clip を監視
+  qsa('.js-fade, .js-fade-line, .js-clip').forEach(el => observer.observe(el));
 
-  // --- ビデオアイテム: 交互に出現 ---
-  qsa('.video-item').forEach((item, i) => {
-    const direction = i % 2 === 0 ? -30 : 30;
-    gsap.fromTo(item,
-      { opacity: 0, x: direction },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: item,
-          start: 'top 82%',
-          toggleActions: 'play none none none',
-        }
-      }
-    );
-  });
+  // ワークカード・ライティングカード（スタガー）
+  const gridObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const cards = qsa('.work-card, .writing-item', entry.target);
+      gsap.fromTo(cards,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }
+      );
+      gridObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.1 });
 
-  // --- About ヒストリーリスト: 1行ずつ ---
-  const historyItems = qsa('.about__history li');
-  gsap.fromTo(historyItems,
-    { opacity: 0, x: 20 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.about__history',
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      }
-    }
-  );
+  qsa('.works__grid, .writing-grid').forEach(el => gridObserver.observe(el));
 
-  // --- Divider ライン: 左から伸びる ---
-  qsa('.divider').forEach(el => {
-    gsap.fromTo(el,
-      { scaleX: 0, transformOrigin: 'left center' },
-      {
-        scaleX: 1,
-        duration: 1.2,
-        ease: 'power3.inOut',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 95%',
-          toggleActions: 'play none none none',
-        }
-      }
-    );
-  });
+  // ビデオアイテム
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (!entry.isIntersecting) return;
+      const direction = Array.from(qsa('.video-item')).indexOf(entry.target) % 2 === 0 ? -30 : 30;
+      gsap.fromTo(entry.target,
+        { opacity: 0, x: direction },
+        { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out' }
+      );
+      videoObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
 
-  // --- フッター ---
-  gsap.fromTo('.footer__name',
-    { opacity: 0, y: 30 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1.2,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.footer',
-        start: 'top 90%',
-        toggleActions: 'play none none none',
-      }
-    }
-  );
+  qsa('.video-item').forEach(el => videoObserver.observe(el));
+
+  // Aboutヒストリー
+  const historyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      gsap.fromTo(qsa('.about__history li'),
+        { opacity: 0, x: 20 },
+        { opacity: 1, x: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out' }
+      );
+      historyObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  const history = qs('.about__history');
+  if (history) historyObserver.observe(history);
+
+  // Divider
+  const dividerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      gsap.fromTo(entry.target,
+        { scaleX: 0, transformOrigin: 'left center' },
+        { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }
+      );
+      dividerObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+
+  qsa('.divider').forEach(el => dividerObserver.observe(el));
+
+  // Footer
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      gsap.fromTo('.footer__name',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
+      );
+      footerObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+
+  const footer = qs('.footer');
+  if (footer) footerObserver.observe(footer);
 
 })();
 
@@ -420,6 +380,8 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
           trigger: wrap,
           start: 'top 85%',
           toggleActions: 'play none none none',
+          invalidateOnRefresh: true, // ← これを全部に追加
+
         }
       }
     );
@@ -429,4 +391,10 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
 window.addEventListener('load', () => {
   ScrollTrigger.refresh();
+});
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    ScrollTrigger.refresh(true);
+  }, 300);
 });
