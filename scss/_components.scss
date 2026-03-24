@@ -235,6 +235,9 @@
     @media (max-width: v.$bp-md) {
       position: static;
       max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      ;
     }
   }
 
@@ -279,6 +282,10 @@
         color: var(--accent);
         min-width: 50px;
         font-style: italic;
+      }
+
+      small {
+        color: rgba(255, 255, 255, 0.2);
       }
     }
   }
@@ -397,6 +404,13 @@
 //  WORKS GRID (WEB)
 // ============================================================
 .works {
+
+  .section__desc {
+    small {
+      color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -446,7 +460,7 @@
     p {
       font-size: 11px;
       letter-spacing: 0.2em;
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.2);
     }
   }
 
@@ -563,6 +577,21 @@
   width: 100%;
   height: 100%;
   border: none;
+  display: block;
+}
+
+.video-item__link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-bottom-color: var(--accent);
+  }
 }
 
 // ============================================================
@@ -696,6 +725,11 @@
   flex-shrink: 0;
   display: grid;
   grid-template-rows: 340px auto;
+  border-left: 1px solid var(--border);
+
+  &.game-slide--start {
+    border: none;
+  }
 
   @media (max-width: v.$bp-md) {
     width: 320px;
@@ -723,9 +757,8 @@
   }
 
   &__info {
-    padding: 28px 4px 20px;
+    padding: 28px 10px 20px;
     border-top: 1px solid var(--border);
-    // border-left: 1px solid var(--border);
   }
 
   &__num {
@@ -759,6 +792,12 @@
     letter-spacing: 0.08em;
     line-height: 2;
     max-width: 420px;
+  }
+
+  &--start {
+    width: 50px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
   }
 
   // "and more" 最終スライド

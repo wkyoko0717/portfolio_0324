@@ -100,6 +100,8 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   gsap.set('.js-fade', { opacity: 0, y: 40 });
   gsap.set('.js-fade-line', { opacity: 0, x: -30 });
   gsap.set('.js-clip', { clipPath: 'inset(100% 0 0 0)' });
+  gsap.set('.work-card, .writing-item', { opacity: 0, y: 50 });
+  gsap.set('.game-slide', { opacity: 0, y: 30 });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -128,13 +130,12 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const cards = qsa('.work-card, .writing-item', entry.target);
-      gsap.fromTo(cards,
-        { opacity: 0, y: 50 },
+      gsap.to(cards, // fromTo → to に変更
         { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }
       );
       gridObserver.unobserve(entry.target);
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0 });
 
   qsa('.works__grid, .writing-grid').forEach(el => gridObserver.observe(el));
 
@@ -219,14 +220,14 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 //  5. スムーズスクロール (ナビリンク)
 // ============================================================
 (function initSmoothNav() {
-  qsa('.nav__links a').forEach(link => {
+  qsa('.nav__links a, .nav__name').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const target = qs(link.getAttribute('href'));
       if (!target) return;
       gsap.to(window, {
         duration: 1.4,
-        scrollTo: { y: target, offsetY: 80 },
+        scrollTo: { y: target, offsetY: 0 },
         ease: 'power3.inOut',
       });
     });
@@ -335,7 +336,7 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   if (!wrap || !track) return;
 
   // トラック全体の横幅 - 画面幅 = スクロールさせる量
-  const getScrollAmount = () => -(track.scrollWidth - window.innerWidth + 1000);
+  const getScrollAmount = () => -(track.scrollWidth - window.innerWidth + 1500);
 
   // ピン留め＋横スクロール
   gsap.to(track, {
@@ -346,7 +347,7 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       pin: true,           // このセクションを画面に固定
       scrub: 1.2,          // 縦スクロール量を横移動に変換（大きいほどぬるぬる）
       start: 'top 200px',    // wrapの上端が画面上端に来たら固定開始
-      end: () => `+=${track.scrollWidth + 1000}`, // トラック全幅分スクロールしたら解除
+      end: () => `+=${track.scrollWidth + 1500}`, // トラック全幅分スクロールしたら解除
       anticipatePin: 1,
       onUpdate: (self) => {
         if (progress) progress.style.width = `${self.progress * 100}%`;
