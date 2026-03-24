@@ -97,33 +97,28 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 // ============================================================
 (function initScrollAnimations() {
 
+  gsap.set('.js-fade', { opacity: 0, y: 40 });
+  gsap.set('.js-fade-line', { opacity: 0, x: -30 });
+  gsap.set('.js-clip', { clipPath: 'inset(100% 0 0 0)' });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const el = entry.target;
 
       if (el.classList.contains('js-fade')) {
-        gsap.fromTo(el,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }
-        );
+        gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' });
       }
       else if (el.classList.contains('js-fade-line')) {
-        gsap.fromTo(el,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 1, ease: 'power3.out' }
-        );
+        gsap.to(el, { opacity: 1, x: 0, duration: 1, ease: 'power3.out' });
       }
       else if (el.classList.contains('js-clip')) {
-        gsap.fromTo(el,
-          { clipPath: 'inset(100% 0 0 0)' },
-          { clipPath: 'inset(0% 0 0 0)', duration: 1.4, ease: 'power4.inOut' }
-        );
+        gsap.to(el, { clipPath: 'inset(0% 0 0 0)', duration: 1.4, ease: 'power4.inOut' });
       }
 
-      observer.unobserve(el); // 一度発火したら解除
+      observer.unobserve(el);
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0 }); // 0にして確実に発火させる
 
   // js-fade / js-fade-line / js-clip を監視
   qsa('.js-fade, .js-fade-line, .js-clip').forEach(el => observer.observe(el));
