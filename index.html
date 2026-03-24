@@ -19,6 +19,15 @@
 </head>
 
 <body>
+  <!-- 背景光源 -->
+  <div class="ambient-lights" id="ambientLights">
+    <div class="ambient-light" style="width:600px;height:600px;top:5vh;left:-8vw;"></div>
+    <div class="ambient-light" style="width:500px;height:500px;top:28vh;right:-6vw;"></div>
+    <div class="ambient-light" style="width:700px;height:700px;top:55vh;left:20vw;opacity:0.2;"></div>
+    <div class="ambient-light" style="width:550px;height:550px;top:100vh;right:5vw;"></div>
+    <div class="ambient-light" style="width:600px;height:600px;top:155vh;left:-5vw;opacity:0.4;"></div>
+    <div class="ambient-light" style="width:480px;height:480px;top:210vh;right:10vw;"></div>
+  </div>
 
   <!-- グレインノイズ -->
   <div class="noise" aria-hidden="true"></div>
@@ -58,9 +67,8 @@
     </div>
 
     <div class="hero__image">
-      <!-- 実際の画像に置き換えてください -->
-      <!-- <div class="placeholder"><video src="images/sunawa.mov" autoplay muted loop playsinline></video></div> -->
-      <div class="placeholder"><img src="images/sunawa.png" alt=""></div>
+      <div class="placeholder"><video src="images/sunawa.mov" autoplay muted loop playsinline></video></div>
+      <!-- <div class="placeholder"><img src="images/sunawa.png" alt=""></div> -->
     </div>
 
     <div class="hero__scroll" aria-hidden="true">
@@ -72,48 +80,172 @@
   <div class="divider"></div>
 
   <!-- ========================================
-       ABOUT
-  ========================================= -->
+     ABOUT
+========================================= -->
   <section class="about section" id="about">
     <div class="section__label js-fade-line">PROFILE</div>
-    <div class="about__inner">
 
+    <!-- プロフィール上段 -->
+    <div class="about__inner">
       <div class="about__image js-clip">
-        <!-- ポートレート画像 / images/kyoko.jpg に置き換え -->
         <div class="placeholder"><img src="images/kyoko.jpg" alt=""></div>
       </div>
-
       <div class="about__content">
         <h2 class="about__name js-fade">百瀬 響子</h2>
         <p class="about__name-en js-fade">Kyoko Momose</p>
         <ul class="about__history">
-          <li class="js-fade">
-            <span class="year">2001</span>
-            <span>慶應義塾大学 環境情報学部 卒業</span>
+          <li class="js-fade"><span class="year">2001</span><span>慶應義塾大学 環境情報学部
+              卒業<br><small>佐藤雅彦研究会にて表現とメディアを専攻。絵本『コんガらガっち』制作に携わる。</small></span></li>
+          <li class="js-fade"><span class="year">2001</span><span>任天堂株式会社 入社<br><small>ポケモン
+                ルビー・サファイア、トモダチコレクション、カードヒーロー等の監修・テキスト制作。</small></span></li>
+          <li class="js-fade"><span
+              class="year">2011</span><span>フリーライターとして独立<br><small>心理テスト・タロット・謎解きアプリ等を多数担当。<br>ランサーズ認定ランサーとして1,000万円以上を売り上げる。</small></span>
           </li>
-          <li class="js-fade">
-            <span class="year">2001</span>
-            <span>任天堂株式会社 入社</span>
-          </li>
-          <li class="js-fade">
-            <span class="year">2010</span>
-            <span>フリーライターとして独立</span>
-          </li>
-          <li class="js-fade">
-            <span class="year">2022</span>
-            <span>株式会社OGA 入社</span>
-          </li>
-          <li class="js-fade">
-            <span class="year">2026</span>
-            <span>株式会社Whatever 業務提携</span>
-          </li>
+          <li class="js-fade"><span class="year">2022</span><span>株式会社OGA
+              入社<br><small>登録者100万人超チャンネルにて動画制作。生成AIを用いたドリームコアチャンネルを運営。</small></span></li>
+          <li class="js-fade"><span class="year">2023</span><span>株式会社Whatever
+              業務提携<br><small>コピーライティング、ブログ制作、WEBデザイン、リーフレットデザイン等を担当。</small></span></li>
         </ul>
       </div>
+    </div>
 
+    <!-- 自己PR：4つの強み -->
+    <div class="strengths">
+      <div class="strengths__intro js-fade">
+        <p class="strengths__lead">クリエイティブを通じて、社会に貢献するため<br>私が大切にしている「4つの強み」をお伝えします。</p>
+      </div>
+
+      <div class="strengths__track" id="strengthsTrack">
+
+        <!-- sticky サイドラベル -->
+        <div class="strengths__sticky">
+          <div class="strengths__sticky-num" id="strengthsNum">01</div>
+          <div class="strengths__sticky-bar"></div>
+        </div>
+
+        <!-- カード群 -->
+        <div class="strengths__cards">
+
+          <div class="strength-card" data-index="0">
+            <div class="strength-card__keyword">洞察力</div>
+            <h3 class="strength-card__title">文脈を読み解き、<br>真のニーズを捉える</h3>
+            <p class="strength-card__body">
+              任天堂でのコーディネーター業務や、タロット占いにおけるセッションを通じ、相手が言葉にできない真のニーズを汲み取り、納得感のある最適解を提示できるよう、努めて参りました。</p>
+          </div>
+
+          <div class="strength-card" data-index="1">
+            <div class="strength-card__keyword">表現力</div>
+            <h3 class="strength-card__title">クリエイティブへの深い理解と、<br>妥協のない姿勢</h3>
+            <p class="strength-card__body">言葉、デザイン、映像のクオリティに妥協せず、一文字、一画にまで魂を込めて仕上げます。受け手の心が動く瞬間を想像しながら、多角的な表現を追求し続けています。
+            </p>
+          </div>
+
+          <div class="strength-card" data-index="2">
+            <div class="strength-card__keyword">適応力</div>
+            <h3 class="strength-card__title">最新技術を身に付け、<br>即座に武器にする</h3>
+            <p class="strength-card__body">
+              100万人規模チャンネルでの動画制作や、生成AIの活用など、常に変化の最前線に身を置いてきました。新しい技術を恐れず自ら学び、表現力を柔軟に高め続ける適応力があると自負しております。</p>
+          </div>
+
+          <div class="strength-card" data-index="3">
+            <div class="strength-card__keyword">完遂力</div>
+            <h3 class="strength-card__title">最後まで責任を持って<br>遂行するプロとして</h3>
+            <p class="strength-card__body">
+              大手企業に10年以上勤務した経験、また認定ランサーとして積み上げた実績は、一つひとつの期待に誠実に応え続けてきた証です。どのような難題でも最後まで責任を持って完遂いたします。</p>
+          </div>
+
+        </div>
+      </div>
     </div>
   </section>
 
   <div class="divider"></div>
+
+  <!-- ========================================
+     GAME
+========================================= -->
+  <section class="section" id="game">
+    <div class="section__label js-fade-line">GAME</div>
+    <p class="section__desc js-fade">任天堂株式会社在籍時に携わった作品です。</p>
+
+    <!-- 水平スクロールトラック -->
+    <div class="game-scroll-wrap" id="gameScrollWrap">
+      <div class="game-track" id="gameTrack">
+
+        <div class="game-slide">
+          <div class="game-slide__image">
+            <div class="placeholder"><img src="images/pokemon.png" alt=""></div>
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">01</span>
+            <h3 class="game-slide__title">ポケットモンスター<br>ルビー＆サファイア</h3>
+            <p class="game-slide__role">Coordination / Direction</p>
+            <p class="game-slide__desc">大人気ソフトの進行管理およびディレクションを担当。ランニングシューズの仕様を新たに追加する等の企画提案も行いました。</p>
+          </div>
+        </div>
+
+        <div class="game-slide">
+          <div class="game-slide__image">
+            <div class="placeholder"><img src="images/tomocolle.png" alt=""></div>
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">02</span>
+            <h3 class="game-slide__title">トモダチ<br>コレクション</h3>
+            <p class="game-slide__role">Planning / Writing</p>
+            <p class="game-slide__desc">『適職の館』コーナーの監修とテキストを担当。オリジナルアバター『Mii』を使ったユニークなコミュニケーション体験を企画しました。</p>
+          </div>
+        </div>
+
+        <div class="game-slide">
+          <div class="game-slide__image">
+            <div class="placeholder"><img src="images/ore.jpg" alt=""></div>
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">03</span>
+            <h3 class="game-slide__title">メイドイン俺</h3>
+            <p class="game-slide__role">Direction / Planning</p>
+            <p class="game-slide__desc">「つくる」楽しさを提供するゲームシステムのディレクションを担当。自由度の高いクリエイティブ体験を形にするため、チュートリアル設計に力を注ぎました。</p>
+          </div>
+        </div>
+
+        <div class="game-slide">
+          <div class="game-slide__image">
+            <div class="placeholder"><img src="images/cardhero.png" alt=""></div>
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">04</span>
+            <h3 class="game-slide__title">高速カードバトル<br>カードヒーロー</h3>
+            <p class="game-slide__role">Scenario Writing</p>
+            <p class="game-slide__desc">奥深い戦略性が魅力のカードゲームのシナリオを担当。プレイしながら自然にルールを理解できるよう、脚本テキストを丁寧に書き進めました。</p>
+          </div>
+        </div>
+
+        <div class="game-slide game-slide--more">
+          <div class="game-slide__more-inner">
+            <p class="game-slide__more-label">and more...</p>
+            <ul class="game-slide__more-list">
+              <li>ポケモンピンボール</li>
+              <li>ファイアーエムブレム</li>
+              <li>あつまれ！！メイドインワリオ</li>
+              <li>その他多数</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- プログレスバー -->
+      <div class="game-progress">
+        <div class="game-progress__bar" id="gameProgressBar"></div>
+      </div>
+
+      <!-- ドラッグヒント -->
+      <div class="game-drag-hint js-fade" id="gameDragHint">
+        <span>DRAG</span>
+        <div class="game-drag-hint__arrow">→</div>
+      </div>
+    </div>
+  </section>
 
   <!-- ========================================
        WEB WORKS

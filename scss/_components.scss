@@ -215,7 +215,7 @@
     display: grid;
     grid-template-columns: 1fr 1.4fr;
     gap: 80px;
-    align-items: start;
+    align-items: center;
 
     @media (max-width: v.$bp-md) {
       grid-template-columns: 1fr;
@@ -224,10 +224,13 @@
   }
 
   &__image {
-    aspect-ratio: 3 / 4;
+    // aspect-ratio: 3 / 4;
+    border-radius: 50%;
     overflow: hidden;
-    position: sticky;
+    // position: sticky;
     top: 100px;
+    filter: grayscale(0.4);
+    // box-shadow: 10px 10px 10px rgba(10, 9, 7, 0.6);
 
     @media (max-width: v.$bp-md) {
       position: static;
@@ -278,6 +281,115 @@
         font-style: italic;
       }
     }
+  }
+}
+
+// ============================================================
+//  STRENGTHS（自己PR）
+// ============================================================
+.strengths {
+  margin-top: 120px;
+
+  &__intro {
+    margin-bottom: 80px;
+  }
+
+  &__lead {
+    font-size: clamp(14px, 1.8vw, 18px);
+    letter-spacing: 0.12em;
+    line-height: 2.2;
+    color: var(--text-muted);
+    border-left: 1px solid var(--accent);
+    padding-left: 28px;
+  }
+
+  &__track {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 60px;
+    position: relative;
+
+    @media (max-width: v.$bp-md) {
+      grid-template-columns: 60px 1fr;
+      gap: 32px;
+    }
+  }
+
+  // stickyの番号サイドバー
+  &__sticky {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 8px;
+  }
+
+  &__sticky-num {
+    font-family: v.$font-display;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1;
+    transition: opacity 0.4s;
+    letter-spacing: -0.02em;
+  }
+
+  &__sticky-bar {
+    width: 1px;
+    height: 200px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    opacity: 0.4;
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.strength-card {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0.3;
+  transform: translateX(20px);
+  transition: opacity 0.6s v.$ease-out-expo, transform 0.6s v.$ease-out-expo;
+
+  &:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  &.is-active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &__keyword {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  &__title {
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  &__body {
+    font-size: 14px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    line-height: 2.2;
+    max-width: 560px;
   }
 }
 
@@ -471,7 +583,7 @@
 }
 
 .writing-item {
-  padding: 40px 32px 40px 0;
+  padding: 40px 32px 40px 10px;
   border-bottom: 1px solid var(--border);
   border-right: 1px solid var(--border);
   transition: background 0.4s;
@@ -484,6 +596,7 @@
     aspect-ratio: 4 / 3;
     margin-bottom: 24px;
     overflow: hidden;
+    transform: translateX(-10px);
   }
 
   &__title {
@@ -552,4 +665,193 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 150px;
+}
+
+// ============================================================
+//  GAME SECTION — 水平ドラッグスクロール
+// ============================================================
+.game-scroll-wrap {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  padding-bottom: 48px;
+
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.game-track {
+  display: flex;
+  gap: 2px;
+  width: max-content;
+  will-change: transform;
+  background-color: rgba(196, 168, 130, 0.06);
+}
+
+.game-slide {
+  width: 480px;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-rows: 340px auto;
+
+  @media (max-width: v.$bp-md) {
+    width: 320px;
+    grid-template-rows: 240px auto;
+  }
+
+  &__image {
+    overflow: hidden;
+    position: relative;
+
+    .placeholder,
+    img {
+      transition: filter 0.6s v.$ease-out-expo, transform 0.8s v.$ease-out-expo;
+      filter: grayscale(100%);
+    }
+  }
+
+  &:hover &__image {
+
+    .placeholder,
+    img {
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+  }
+
+  &__info {
+    padding: 28px 4px 20px;
+    border-top: 1px solid var(--border);
+    // border-left: 1px solid var(--border);
+  }
+
+  &__num {
+    font-family: v.$font-display;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  &__role {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  &__desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    line-height: 2;
+    max-width: 420px;
+  }
+
+  // "and more" 最終スライド
+  &--more {
+    width: 320px;
+    align-items: center;
+    border-left: 1px solid var(--border);
+  }
+
+  &__more-inner {
+    padding: 40px;
+  }
+
+  &__more-label {
+    font-family: v.$font-display;
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  &__more-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    li {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      padding-left: 16px;
+      position: relative;
+
+      &::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+
+// プログレスバー
+.game-progress {
+  height: 1px;
+  background: var(--border);
+  margin-top: 40px;
+  position: relative;
+
+  &__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.1s linear;
+  }
+}
+
+// ドラッグヒント
+.game-drag-hint {
+  position: absolute;
+  bottom: 56px;
+  right: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  pointer-events: none;
+
+  &__arrow {
+    animation: dragArrow 1.6s v.$ease-in-out infinite;
+  }
+}
+
+@keyframes dragArrow {
+
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(8px);
+    opacity: 0.4;
+  }
 }

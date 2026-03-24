@@ -295,3 +295,134 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     }
   });
 })();
+
+// ============================================================
+//  背景光源パララックス
+// ============================================================
+(function initAmbientParallax() {
+  const lights = qsa('.ambient-light');
+  // コンテンツより30〜50%遅くスクロールさせる
+  const speeds = [0.35, 0.42, 0.28, 0.38, 0.45, 0.32];
+
+  lights.forEach((light, i) => {
+    const speed = speeds[i] || 0.4;
+    gsap.to(light, {
+      yPercent: -(100 * speed * 1.5),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5, // scrubを大きくするほど「ゆっくり追いかけてくる」感じになる
+      }
+    });
+  });
+})();
+
+// ============================================================
+//  自己PR：スクロール連動カード＋番号カウントアップ
+// ============================================================
+(function initStrengths() {
+  const cards = qsa('.strength-card');
+  const numEl = qs('#strengthsNum');
+  if (!cards.length || !numEl) return;
+
+  const nums = ['01', '02', '03', '04'];
+
+  cards.forEach((card, i) => {
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 60%',
+      end: 'bottom 40%',
+      onEnter: () => {
+        // このカードをアクティブに
+        cards.forEach(c => c.classList.remove('is-active'));
+        card.classList.add('is-active');
+        // 番号をフリップ
+        gsap.to(numEl, {
+          opacity: 0,
+          y: -10,
+          duration: 0.2,
+          onComplete: () => {
+            numEl.textContent = nums[i];
+            gsap.to(numEl, { opacity: 1, y: 0, duration: 0.3 });
+          }
+        });
+      },
+      onEnterBack: () => {
+        cards.forEach(c => c.classList.remove('is-active'));
+        card.classList.add('is-active');
+        gsap.to(numEl, {
+          opacity: 0,
+          y: 10,
+          duration: 0.2,
+          onComplete: () => {
+            numEl.textContent = nums[i];
+            gsap.to(numEl, { opacity: 1, y: 0, duration: 0.3 });
+          }
+        });
+      },
+    });
+  });
+
+  // 最初のカードを最初からアクティブに
+  cards[0]?.classList.add('is-active');
+})();
+
+// ============================================================
+//  GAMEセクション — ScrollTrigger Pin 水平スクロール
+// ============================================================
+(function initGameScroll() {
+  const wrap = qs('#gameScrollWrap');
+  const track = qs('#gameTrack');
+  const progress = qs('#gameProgressBar');
+  const hint = qs('#gameDragHint');
+  if (!wrap || !track) return;
+
+  // トラック全体の横幅 - 画面幅 = スクロールさせる量
+  const getScrollAmount = () => -(track.scrollWidth - window.innerWidth + 1000);
+
+  // ピン留め＋横スクロール
+  gsap.to(track, {
+    x: getScrollAmount,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: wrap,
+      pin: true,           // このセクションを画面に固定
+      scrub: 1.2,          // 縦スクロール量を横移動に変換（大きいほどぬるぬる）
+      start: 'top 200px',    // wrapの上端が画面上端に来たら固定開始
+      end: () => `+=${track.scrollWidth + 1000}`, // トラック全幅分スクロールしたら解除
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        if (progress) progress.style.width = `${self.progress * 100}%`;
+        if (hint && self.progress > 0.02) gsap.to(hint, { opacity: 0, duration: 0.3 });
+      },
+    }
+  });
+
+  // ドラッグは念のため残す（タッチ用）
+  let startX = 0;
+  wrap.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  // スライドごとの入場アニメーション
+  qsa('.game-slide').forEach((slide, i) => {
+    gsap.fromTo(slide,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        delay: i * 0.08,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: wrap,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        }
+      }
+    );
+  });
+
+})();
