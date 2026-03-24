@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KYOKO MOMOSE — Portfolio</title>
+  <meta name="description" content="百瀬響子 ポートフォリオ。Web Design / Video / Writing / Music">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@100;200;300;400&display=swap"
+    rel="stylesheet">
+
+  <!-- スタイル (SCSSをコンパイルしたCSS) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- グレインノイズ -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- カスタムカーソル -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- ========================================
+       NAV
+  ========================================= -->
+  <nav class="nav" id="nav">
+    <div class="nav__name">KYOKO MOMOSE</div>
+    <ul class="nav__links">
+      <li><a href="#about">PROFILE</a></li>
+      <li><a href="#web">WEB</a></li>
+      <li><a href="#video">VIDEO</a></li>
+      <li><a href="#writing">WRITING</a></li>
+    </ul>
+    <div class="nav__menu" aria-label="メニュー">
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- ========================================
+       HERO
+  ========================================= -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <span class="hero__label">Creative Director / Designer</span>
+      <h1 class="hero__title">
+        <span class="hero__title-line">KYOKO</span>
+        <span class="hero__title-line hero__title-line--italic">MOMOSE</span>
+      </h1>
+      <p class="hero__sub">Web Design · Video · Writing · Music</p>
+    </div>
+
+    <div class="hero__image">
+      <!-- 実際の画像に置き換えてください -->
+      <!-- <div class="placeholder"><video src="images/sunawa.mov" autoplay muted loop playsinline></video></div> -->
+      <div class="placeholder"><img src="images/sunawa.png" alt=""></div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>SCROLL</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========================================
+       ABOUT
+  ========================================= -->
+  <section class="about section" id="about">
+    <div class="section__label js-fade-line">PROFILE</div>
+    <div class="about__inner">
+
+      <div class="about__image js-clip">
+        <!-- ポートレート画像 / images/kyoko.jpg に置き換え -->
+        <div class="placeholder"><img src="images/kyoko.jpg" alt=""></div>
+      </div>
+
+      <div class="about__content">
+        <h2 class="about__name js-fade">百瀬 響子</h2>
+        <p class="about__name-en js-fade">Kyoko Momose</p>
+        <ul class="about__history">
+          <li class="js-fade">
+            <span class="year">2001</span>
+            <span>慶應義塾大学 環境情報学部 卒業</span>
+          </li>
+          <li class="js-fade">
+            <span class="year">2001</span>
+            <span>任天堂株式会社 入社</span>
+          </li>
+          <li class="js-fade">
+            <span class="year">2010</span>
+            <span>フリーライターとして独立</span>
+          </li>
+          <li class="js-fade">
+            <span class="year">2022</span>
+            <span>株式会社OGA 入社</span>
+          </li>
+          <li class="js-fade">
+            <span class="year">2026</span>
+            <span>株式会社Whatever 業務提携</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========================================
+       WEB WORKS
+  ========================================= -->
+  <section class="works section" id="web">
+    <div class="section__label js-fade-line">WEB</div>
+    <p class="section__desc js-fade">私がデザインしたウェブページです。</p>
+
+    <div class="works__grid">
+
+      <div class="work-card js-fade">
+        <div class="work-card__image">
+          <div class="placeholder"><img src="images/ocha.jpg" alt=""></div>
+          <div class="work-card__overlay"><span>VIEW</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>Whatever お茶の水</h3>
+          <p>京都シェアオフィス</p>
+        </div>
+      </div>
+
+      <div class="work-card js-fade">
+        <div class="work-card__image">
+          <div class="placeholder"><img src="images/aruniwa.jpg" alt=""></div>
+          <div class="work-card__overlay"><span>VIEW</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>或庭 — aruniwa —</h3>
+          <p>タロット占いサロン</p>
+        </div>
+      </div>
+
+      <div class="work-card js-fade">
+        <div class="work-card__image">
+          <div class="placeholder"><img src="images/nature.jpg" alt=""></div>
+          <div class="work-card__overlay"><span>VIEW</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>nature escape</h3>
+          <p>京都自然写真企画展</p>
+        </div>
+      </div>
+
+      <div class="work-card js-fade">
+        <div class="work-card__image">
+          <div class="placeholder"><img src="images/and.jpg" alt=""></div>
+          <div class="work-card__overlay"><span>VIEW</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>and lobby</h3>
+          <p>新時代のAI教室</p>
+        </div>
+      </div>
+
+      <div class="work-card js-fade">
+        <div class="work-card__image">
+          <div class="placeholder"><img src="images/qumari.jpg" alt=""></div>
+          <div class="work-card__overlay"><span>VIEW</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>QUMARI</h3>
+          <p>女性の自律を促すサロン</p>
+        </div>
+      </div>
+
+      <div class="work-card js-fade">
+        <div class="work-card__image">
+          <div class="placeholder"><img src="images/unerior.jpg" alt=""></div>
+          <div class="work-card__overlay"><span>VIEW</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>U-nerior</h3>
+          <p>潜在アーティスト発掘企画</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========================================
+       VIDEO
+  ========================================= -->
+  <section class="section" id="video">
+    <div class="section__label js-fade-line">VIDEO</div>
+    <p class="section__desc js-fade">私が手掛けた映像作品です。</p>
+
+    <div class="video-works">
+
+      <div class="video-item">
+        <div class="video-item__image js-clip">
+          <div class="placeholder"><iframe src="https://www.youtube.com/embed/lfcQkQoj5zM"></iframe></div>
+        </div>
+        <div class="video-item__content">
+          <div class="video-item__num js-fade">01</div>
+          <h3 class="video-item__title js-fade">Lost in COMPLEX</h3>
+          <p class="video-item__desc js-fade">
+            ドリームコアと呼ばれる、夢の中のような不思議な世界観を表現した映像チャンネルをプロデュース。代表作「地下鉄水族館」は20万再生を突破。
+          </p>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-item__image js-clip">
+          <div class="placeholder"><iframe src="https://www.youtube.com/embed/NXM9OYRs1Tc"></iframe></div>
+        </div>
+        <div class="video-item__content">
+          <div class="video-item__num js-fade">02</div>
+          <h3 class="video-item__title js-fade">大人買いコレクター</h3>
+          <p class="video-item__desc js-fade">
+            登録者100万人を超えるおもちゃチャンネルにて動画制作を担当。楽器演奏、工作、知育菓子など幅広いコンテンツを撮影編集。
+          </p>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-item__image js-clip">
+          <div class="placeholder"><iframe src="https://www.youtube.com/embed/N6YD7xFGan0"></iframe></div>
+        </div>
+        <div class="video-item__content">
+          <div class="video-item__num js-fade">03</div>
+          <h3 class="video-item__title js-fade">オーロラガーデン</h3>
+          <p class="video-item__desc js-fade">
+            自己実現や開運を目指す人のためのスピリチュアルチャンネル。企画構成、脚本、AI音声生成、映像・音楽ディレクションを担当。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ========================================
+       WRITING
+  ========================================= -->
+  <section class="section" id="writing">
+    <div class="section__label js-fade-line">WRITING</div>
+    <p class="section__desc js-fade">心理テストやブログなどのライティング実績です。</p>
+
+    <div class="writing-grid">
+
+      <div class="writing-item js-fade">
+        <div class="writing-item__image">
+          <div class="placeholder"><img src="images/kinoko.jpg" alt=""></div>
+        </div>
+        <p class="writing-item__sub">心理テスト</p>
+        <h3 class="writing-item__title">きのこHokuto</h3>
+        <p class="writing-item__role">Concept / Copywriting</p>
+      </div>
+
+      <div class="writing-item js-fade">
+        <div class="writing-item__image">
+          <div class="placeholder"><img src="images/shinri.jpg" alt=""></div>
+        </div>
+        <p class="writing-item__sub">心理テスト</p>
+        <h3 class="writing-item__title">shinri</h3>
+        <p class="writing-item__role">Content Planning / Writing</p>
+      </div>
+
+      <div class="writing-item js-fade">
+        <div class="writing-item__image">
+          <div class="placeholder"><img src="images/blog.jpg" alt=""></div>
+        </div>
+        <p class="writing-item__sub">オフィシャルブログ</p>
+        <h3 class="writing-item__title">Whatever</h3>
+        <p class="writing-item__role">Writing</p>
+      </div>
+
+      <div class="writing-item js-fade">
+        <div class="writing-item__image">
+          <div class="placeholder"><img src="images/east.png" alt=""></div>
+        </div>
+        <p class="writing-item__sub">キャッチコピー制作</p>
+        <h3 class="writing-item__title">Whatever East</h3>
+        <p class="writing-item__role">Content Planning / Writing</p>
+      </div>
+
+      <div class="writing-item js-fade">
+        <div class="writing-item__image">
+          <div class="placeholder"><img src="images/note.png" alt=""></div>
+        </div>
+        <p class="writing-item__sub">note</p>
+        <h3 class="writing-item__title">AIと哲学</h3>
+        <p class="writing-item__role">Self Produce / Essay</p>
+      </div>
+
+      <div class="writing-item js-fade">
+        <div class="writing-item__image">
+          <div class="placeholder"><img src="images/tarot.png" alt=""></div>
+        </div>
+        <p class="writing-item__sub">タロットカード</p>
+        <h3 class="writing-item__title">MYSTIC MONDAYS</h3>
+        <p class="writing-item__role">Writing</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================
+       FOOTER
+  ========================================= -->
+  <footer class="footer">
+    <p class="footer__name">Kyoko Momose</p>
+    <p class="footer__copy">© 2026 KYOKO MOMOSE. All rights reserved.</p>
+  </footer>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

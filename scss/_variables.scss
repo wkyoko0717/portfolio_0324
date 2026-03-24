@@ -1,0 +1,29 @@
+// ============================================================
+//  _variables.scss
+// ============================================================
+
+// --- Colors ---
+$bg:            #0a0907;
+$bg-surface:    #131109;
+$text:          #e8e3db;
+$text-muted:    #6e6a64;
+$accent:        #c4a882;
+$border:        rgba(232, 227, 219, 0.08);
+$border-light:  rgba(232, 227, 219, 0.15);
+
+// --- Typography ---
+$font-display:  'Cormorant Garamond', 'Georgia', serif;
+$font-body:     'Jost', 'Helvetica Neue', sans-serif;
+
+// --- Spacing ---
+$gutter:        clamp(24px, 5vw, 80px);
+$section-gap:   clamp(100px, 16vw, 200px);
+
+// --- Easing ---
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out:   cubic-bezier(0.76, 0, 0.24, 1);
+
+// --- Breakpoints ---
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1100px;
