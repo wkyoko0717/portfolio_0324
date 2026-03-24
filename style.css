@@ -158,20 +158,6 @@ h3 {
   width: calc(100% - var(--gutter) * 2);
 }
 
-.js-fade {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.js-fade-line {
-  opacity: 0;
-  transform: translateX(-20px);
-}
-
-.js-clip {
-  clip-path: inset(100% 0 0 0);
-}
-
 .ambient-lights {
   position: fixed;
   inset: 0;
