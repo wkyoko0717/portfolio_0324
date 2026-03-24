@@ -426,3 +426,7 @@ const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   });
 
 })();
+
+window.addEventListener('load', () => {
+  ScrollTrigger.refresh();
+});
